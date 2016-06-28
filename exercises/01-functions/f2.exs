@@ -4,3 +4,16 @@
 # If the second is zero, return “Buzz.”
 # Otherwise return the third argument.
 # Do not use any language features that we haven’t yet covered in this book.
+
+fizz_buzz = fn
+  (0, 0, _) -> "FizzBuzz."
+  (0, _, _) -> "Fizz."
+  (_, 0, _) -> "Buzz."
+  (_, _, x) -> x
+end
+
+IO.puts fizz_buzz.(0, 0, 0)
+IO.puts fizz_buzz.(0, 0, 1)
+IO.puts fizz_buzz.(0, 1, 1)
+IO.puts fizz_buzz.(1, 0, 1)
+IO.puts fizz_buzz.(1, 1, 1)
