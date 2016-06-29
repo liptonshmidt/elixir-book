@@ -14,10 +14,14 @@ end
 
 fbr = fn n -> fizz_buzz.(rem(n,3), rem(n,5), n) end
 
-IO.puts fbr.(10)
-IO.puts fbr.(11)
-IO.puts fbr.(12)
-IO.puts fbr.(13)
-IO.puts fbr.(14)
-IO.puts fbr.(15)
-IO.puts fbr.(16)
+res = [
+  fbr.(10),
+  fbr.(11),
+  fbr.(12),
+  fbr.(13),
+  fbr.(14),
+  fbr.(15),
+  fbr.(16)
+]
+
+IO.inspect res
