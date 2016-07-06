@@ -1,3 +1,4 @@
+# the very first solution
 defmodule Chop do
   def guess(actual, a..b) when a == b do
     IO.puts actual
