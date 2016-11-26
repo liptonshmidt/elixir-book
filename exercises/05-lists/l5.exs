@@ -27,7 +27,27 @@ defmodule MyList do
   # split(enumerable, count)
   # Splits the enumerable into two enumerables, leaving count elements in the first one. 
   # If count is a negative number, it starts counting from the back to the beginning of the enumerable
+  def split(list, count) when count < 0, do: split(Enum.reverse(list), -count)
+  def split(list, count), do: _split(list, count, [])
 
+  def _split([], count, collected) do
+    [collected, []]
+  end
+
+  def _split(list, count, collected) do
+    # IO.inspect "########"
+    # IO.inspect collected
+
+    if count > 0 do
+      [h | t] = list
+      # raise "#{h}"
+      new_collected = collected ++ [h]
+      # IO.inspect new_collected
+      _split(t, count - 1, new_collected)
+    else
+      [collected, list]
+    end
+  end
 end
 
 
@@ -59,6 +79,8 @@ IO.inspect MyList.filter([1,2,3,4], &(&1 > 2))
 
 
 # split specs
+IO.inspect "split!"
+
 IO.inspect MyList.split([1, 2, 3, 4, 5, 6], 3)
 # => [1, 2, 3], [4, 5, 6]
 
