@@ -3,9 +3,9 @@ defmodule Sequence.Application do
 
   use Application
 
-  def start(_type, initial_number) do
+  def start(_type, [initial_number, initial_delta]) do
     children = [
-      { Sequence.Stash,  initial_number},
+      { Sequence.Stash,  [initial_number, initial_delta]},
       { Sequence.Server, nil},
     ]
 

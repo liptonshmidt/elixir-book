@@ -32,7 +32,8 @@ defmodule Sequence.Server do
   # GenServer implementation
 
   def init(_) do
-    state = %State{ current_number: Sequence.Stash.get() }
+    [n, d] = Sequence.Stash.get()
+    state = %State{ current_number: n, delta: d }
     { :ok, state }
   end
   
@@ -48,8 +49,8 @@ defmodule Sequence.Server do
     raise "Manually triggered exception!"
   end
 
-  def terminate(_reason, %{current_number: n}) do
-    Sequence.Stash.update(n)
+  def terminate(_reason, %{current_number: n, delta: d}) do
+    Sequence.Stash.update([n, d])
   end
 
   def code_change("0", old_state = current_number, _extra) do

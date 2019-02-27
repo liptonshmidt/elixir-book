@@ -4,7 +4,7 @@ defmodule Sequence.MixProject do
   def project do
     [
       app: :sequence,
-      version: "0.4.0",
+      version: "0.5.0",
       elixir: "~> 1.6-dev",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -14,7 +14,7 @@ defmodule Sequence.MixProject do
   def application do
     [
       mod: {
-        Sequence.Application, 456
+        Sequence.Application, [100, 1]
       },
       registered: [
         Sequence.Server,
