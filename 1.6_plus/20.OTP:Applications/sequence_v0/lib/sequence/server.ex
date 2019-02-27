@@ -44,7 +44,7 @@ defmodule Sequence.Server do
     { :noreply, %{state | delta: delta}}
   end
 
-  def handle_cast(:crash_server, state) do
+  def handle_cast(:crash_server, _state) do
     raise "Manually triggered exception!"
   end
 

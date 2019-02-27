@@ -1,5 +1,8 @@
 defmodule Sequence.Stash do
   use GenServer
+  require Logger
+
+  @vsn "1"
 
   @me __MODULE__
   
