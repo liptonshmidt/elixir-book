@@ -23,6 +23,11 @@ defmodule Sequence.Server do
     GenServer.cast __MODULE__, {:increment_number, delta}
   end
 
+  # to test reliability of data processing and check OTP recovery
+  def crash_server do
+    GenServer.cast __MODULE__, :crash_server
+  end
+
   #####
   # GenServer implementation
 
@@ -39,8 +44,12 @@ defmodule Sequence.Server do
     { :noreply, %{state | delta: delta}}
   end
 
-  def terminate(_reason, current_number) do
-    Sequence.Stash.update(current_number)
+  def handle_cast(:crash_server, state) do
+    raise "Manually triggered exception!"
+  end
+
+  def terminate(_reason, %{current_number: n}) do
+    Sequence.Stash.update(n)
   end
 
   def code_change("0", old_state = current_number, _extra) do
@@ -52,5 +61,13 @@ defmodule Sequence.Server do
     Logger.info inspect(old_state)
     Logger.info inspect(new_state)
     {:ok, new_state}
+  end
+
+  def code_change("1", state, _extra) do
+    {:ok, state}
+  end
+
+  def code_change(_version, state, _extra) do
+    {:ok, state}
   end
 end
